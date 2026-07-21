@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bxp5adu5vxsyj"]
+
+[ext_resource type="Texture2D" uid="uid://p35i7v346q71" path="res://assets/enemies/gnome.png" id="1_02sn3"]
+[ext_resource type="Script" uid="uid://cboxenwskjv2v" path="res://scripts/enemies/gnome.gd" id="1_ap4xf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2auwi"]
+radius = 4.0
+height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap4xf"]
+atlas = ExtResource("1_02sn3")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkd2s"]
+atlas = ExtResource("1_02sn3")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2auwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap4xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkd2s")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Gnome" type="CharacterBody2D" unique_id=1972237894]
+collision_layer = 4
+script = ExtResource("1_ap4xf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=945780329]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_2auwi")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1777568028]
+position = Vector2(1, -16)
+sprite_frames = SubResource("SpriteFrames_2auwi")
+animation = &"Idle"
+frame_progress = 0.084638424
