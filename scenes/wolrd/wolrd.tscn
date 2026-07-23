@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://nljv2ev76d4k" path="res://assets/world/campfire.png" id="2_h4w6o"]
 [ext_resource type="Texture2D" uid="uid://x2edlp1e8oal" path="res://assets/world/friend.png" id="3_bqo2r"]
 [ext_resource type="PackedScene" uid="uid://bxp5adu5vxsyj" path="res://scenes/enemies/gnome.tscn" id="3_tjstc"]
+[ext_resource type="Script" uid="uid://ld8h65kh2pj4" path="res://scripts/player/bars.gd" id="8_h4w6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr87f"]
 texture = ExtResource("1_8x47l")
@@ -41,6 +42,18 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_dr87f")
 sources/1 = SubResource("TileSetAtlasSource_tjstc")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.67779046, 0.60135394, 0.2203551, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gngh"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcnqv"]
+bg_color = Color(2.5027991e-06, 0.6425815, 0.9267161, 1)
+
 [node name="Wolrd" type="Node2D" unique_id=1071080768]
 
 [node name="Items" type="Node2D" parent="." unique_id=1749422466]
@@ -65,7 +78,8 @@ tile_map_data = PackedByteArray("AADt/wYAAAABAAAAAADu/wYAAAACAAAAAADv/wYAAAADAAA
 tile_set = SubResource("TileSet_2auwi")
 
 [node name="Player" parent="." unique_id=1665968398 instance=ExtResource("2_dr87f")]
-position = Vector2(18, -3)
+unique_name_in_owner = true
+position = Vector2(16, 33)
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1363966795]
 position = Vector2(0, -23)
@@ -81,3 +95,52 @@ position = Vector2(-101, 27)
 [node name="Gnome2" parent="." unique_id=1202956978 instance=ExtResource("3_tjstc")]
 position = Vector2(92, -91)
 scale = Vector2(-1, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1824439757]
+
+[node name="bars" type="Control" parent="CanvasLayer" unique_id=637034184]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_h4w6o")
+
+[node name="Piss" type="ProgressBar" parent="CanvasLayer/bars" unique_id=273910122]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 28.0
+offset_right = 120.0
+offset_bottom = 55.0
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+step = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/bars/Piss" unique_id=1326266525]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 1.0
+offset_right = 86.0
+offset_bottom = 24.0
+text = "Piss"
+
+[node name="Water" type="ProgressBar" parent="CanvasLayer/bars" unique_id=186479170]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fcnqv")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/bars/Water" unique_id=2057716826]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 1.0
+offset_right = 85.0
+offset_bottom = 24.0
+text = "Water"
+
+[node name="Timer" type="Timer" parent="CanvasLayer/bars" unique_id=1609037686]
+unique_name_in_owner = true
