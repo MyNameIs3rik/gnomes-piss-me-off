@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://x2edlp1e8oal" path="res://assets/world/friend.png" id="3_bqo2r"]
 [ext_resource type="PackedScene" uid="uid://bxp5adu5vxsyj" path="res://scenes/enemies/gnome.tscn" id="3_tjstc"]
 [ext_resource type="Script" uid="uid://ld8h65kh2pj4" path="res://scripts/player/bars.gd" id="8_h4w6o"]
+[ext_resource type="PackedScene" uid="uid://be2bjidr7wiaf" path="res://scenes/enemies/dmg_zone.tscn" id="9_bqo2r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr87f"]
 texture = ExtResource("1_8x47l")
@@ -41,6 +42,9 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_dr87f")
 sources/1 = SubResource("TileSetAtlasSource_tjstc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(8, 25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 draw_center = false
@@ -90,11 +94,31 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="Gnome" parent="." unique_id=1972237894 instance=ExtResource("3_tjstc")]
-position = Vector2(-101, 27)
+position = Vector2(-91, 17)
+
+[node name="Dmg_zone" parent="Gnome" unique_id=514750065 instance=ExtResource("9_bqo2r")]
+position = Vector2(193, -14)
+rotation = -3.1415925
+scale = Vector2(1, -1)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gnome/Dmg_zone" unique_id=203740264]
+position = Vector2(193, 2.0000172)
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Gnome2" parent="." unique_id=1202956978 instance=ExtResource("3_tjstc")]
 position = Vector2(92, -91)
 scale = Vector2(-1, 1)
+
+[node name="Dmg_zone" parent="Gnome2" unique_id=652960126 instance=ExtResource("9_bqo2r")]
+position = Vector2(180, 52)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gnome2/Dmg_zone" unique_id=851922578]
+position = Vector2(180, -65)
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1824439757]
 
@@ -125,6 +149,7 @@ offset_bottom = 24.0
 text = "Piss"
 
 [node name="Water" type="ProgressBar" parent="CanvasLayer/bars" unique_id=186479170]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 27.0
@@ -143,4 +168,3 @@ offset_bottom = 24.0
 text = "Water"
 
 [node name="Timer" type="Timer" parent="CanvasLayer/bars" unique_id=1609037686]
-unique_name_in_owner = true

@@ -11,6 +11,7 @@ extends Control
 
 
 
+
 func _ready() -> void:
 	timer.wait_time = conversion_interval
 	timer.timeout.connect(_on_convert_timer_timeout)
@@ -22,6 +23,8 @@ func _on_convert_timer_timeout() -> void:
 	if piss.value >= piss.max_value:
 		return
 	if water.value <= 0:
+		return
+	if player.HP <= 0:
 		return
 
 	var amount = min(conversion_amount, water.value)

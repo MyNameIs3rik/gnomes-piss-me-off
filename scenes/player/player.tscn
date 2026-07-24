@@ -1,14 +1,48 @@
 [gd_scene format=3 uid="uid://dk4umbo2ls6hk"]
 
 [ext_resource type="Script" uid="uid://bapq5gnxch2uu" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://bv65tb37yw8et" path="res://assets/player/attack_11.png" id="2_fm80t"]
 [ext_resource type="Texture2D" uid="uid://y7au354fq2ww" path="res://assets/player/Player1.png" id="2_lvxji"]
+[ext_resource type="Texture2D" uid="uid://dd53kfvp6v2q3" path="res://assets/player/death_1.png" id="2_qek5x"]
+[ext_resource type="Texture2D" uid="uid://boh3twgvlwxcq" path="res://assets/player/death_2.png" id="3_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://iqqjysua8ggu" path="res://assets/player/player_idle1.png" id="3_75vfm"]
+[ext_resource type="Texture2D" uid="uid://cvcd6n5mnox1x" path="res://assets/player/attack_22.png" id="3_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://dlucvs2q4bx8l" path="res://assets/player/Player_walkf.png" id="3_p47bc"]
 [ext_resource type="Texture2D" uid="uid://cwjl1yy13jnf0" path="res://assets/player/player_spray.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://cs7f0g2powsag" path="res://assets/player/Player_walk_left-right.png" id="4_75vfm"]
+[ext_resource type="Texture2D" uid="uid://cxo32ok5xhq2w" path="res://assets/player/resp_2.png" id="5_h17s1"]
+[ext_resource type="Texture2D" uid="uid://dw6cfj4q0nlog" path="res://assets/player/resp_1.png" id="7_5gtgg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fm80t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gx1jg")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qek5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5gtgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5gtgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h17s1")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_lvxji")
@@ -54,14 +88,19 @@ size = Vector2(7, 30)
 
 [node name="Player" type="CharacterBody2D" unique_id=1665968398]
 collision_layer = 2
+collision_mask = 3
 floor_snap_length = 2.0
 script = ExtResource("1_dovo2")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=2012316314]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"pee"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1054483101]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_2auwi")
+
+[node name="Timer" type="Timer" parent="." unique_id=1787137524]
+
+[node name="attack_timer" type="Timer" parent="." unique_id=573923]
