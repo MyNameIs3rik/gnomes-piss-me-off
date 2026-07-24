@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://be2bjidr7wiaf"]
+
+[ext_resource type="Script" uid="uid://c2l1ifk1rfhsg" path="res://scripts/enemies/dmg_zone.gd" id="1_isvs3"]
+
+[node name="Dmg_zone" type="Area2D" unique_id=514750065]
+collision_mask = 2
+script = ExtResource("1_isvs3")
+
+[node name="Timer" type="Timer" parent="." unique_id=864628723]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
