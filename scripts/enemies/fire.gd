@@ -10,9 +10,9 @@ func take_damage(damage: int) -> void:
 	health -= damage
 	if health <= 0:
 		queue_free()
-	display_damage(health)
+	display_damage()
 
-func display_damage(health: int) -> void:
+func display_damage() -> void:
 	var size: float = (float(health) / float(max_health)) / 2 + 0.5
 	$AnimatedSprite2D.scale = Vector2(size,size)
 	$CPUParticles2D.scale = Vector2(size,size)
