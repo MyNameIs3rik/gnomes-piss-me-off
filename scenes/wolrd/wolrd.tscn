@@ -203,9 +203,20 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("15_o26f6")
 
-[node name="Gnome" parent="." unique_id=1972237894 instance=ExtResource("3_tjstc")]
+[node name="Entities" type="Node2D" parent="." unique_id=533292662]
+
+[node name="Gnome" parent="Entities" unique_id=1972237894 instance=ExtResource("3_tjstc")]
 position = Vector2(-91, 17)
 
-[node name="Gnome2" parent="." unique_id=1202956978 instance=ExtResource("3_tjstc")]
+[node name="Gnome2" parent="Entities" unique_id=1202956978 instance=ExtResource("3_tjstc")]
 position = Vector2(92, -91)
-scale = Vector2(-1, 1)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+
+[node name="Helpers" type="Node2D" parent="." unique_id=570046090]
+
+[node name="Timer" type="Timer" parent="Helpers" unique_id=653069143]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Helpers/Timer" to="." method="_on_timer_timeout"]
