@@ -7,14 +7,17 @@
 radius = 2.0
 
 [node name="pee" type="Area2D" unique_id=2042339371]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 13
 script = ExtResource("1_uhgyt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1777656485]
+visible = false
 shape = SubResource("CircleShape2D_2auwi")
 
 [node name="Piss" type="Sprite2D" parent="." unique_id=1445583040]
+modulate = Color(1, 0.98333335, 0, 1)
+self_modulate = Color(0.98333335, 1, 0, 1)
 texture = ExtResource("2_88vim")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

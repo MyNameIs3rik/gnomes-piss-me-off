@@ -1,20 +1,17 @@
 [gd_scene format=4 uid="uid://cgiaung1d6rlb"]
 
-[ext_resource type="Texture2D" uid="uid://d4mp3rtl65pxk" path="res://assets/world/pole.png" id="1_6vryo"]
 [ext_resource type="Texture2D" uid="uid://bda15xdpylaj8" path="res://assets/world/grass.png" id="1_8x47l"]
 [ext_resource type="Texture2D" uid="uid://57n8x4ga2q3m" path="res://assets/world/background/bg0.png" id="1_o26f6"]
 [ext_resource type="Texture2D" uid="uid://bhmva4j4cwy6q" path="res://assets/world/dirt.png" id="2_0limw"]
 [ext_resource type="Texture2D" uid="uid://brwgigkrs0yj6" path="res://assets/world/background/stars.png" id="2_4ss0p"]
 [ext_resource type="PackedScene" uid="uid://dk4umbo2ls6hk" path="res://scenes/player/player.tscn" id="2_dr87f"]
-[ext_resource type="Texture2D" uid="uid://nljv2ev76d4k" path="res://assets/world/campfire.png" id="2_h4w6o"]
-[ext_resource type="Texture2D" uid="uid://x2edlp1e8oal" path="res://assets/world/friend.png" id="3_bqo2r"]
 [ext_resource type="Texture2D" uid="uid://vd3ie520fuuf" path="res://assets/world/background/bg1.png" id="3_f1qrj"]
 [ext_resource type="PackedScene" uid="uid://bxp5adu5vxsyj" path="res://scenes/enemies/gnome.tscn" id="3_tjstc"]
 [ext_resource type="Texture2D" uid="uid://djrgkh457gl5v" path="res://assets/world/background/clouds.png" id="4_dyalv"]
 [ext_resource type="Texture2D" uid="uid://cnokw36gbas0" path="res://assets/world/background/bg2.png" id="5_wnabx"]
 [ext_resource type="Texture2D" uid="uid://8c6j3juejnxj" path="res://assets/world/background/forestbg.png" id="6_h8v8g"]
 [ext_resource type="Texture2D" uid="uid://dwtwqikcu2kr1" path="res://assets/world/background/fog.png" id="7_meist"]
-[ext_resource type="PackedScene" uid="uid://cr7w2oljkcksq" path="res://scenes/enemies/fire.tscn" id="11_4ss0p"]
+[ext_resource type="PackedScene" uid="uid://dj3vwu4lycb76" path="res://scenes/wolrd/pole.tscn" id="8_ou75i"]
 [ext_resource type="Texture2D" uid="uid://c82hdbipq78t8" path="res://assets/world/grass_water.png" id="14_f1qrj"]
 [ext_resource type="Texture2D" uid="uid://748gua716ryg" path="res://assets/world/40x8_water_tiles.png" id="15_dyalv"]
 [ext_resource type="Texture2D" uid="uid://dvq1d26e1khsb" path="res://assets/world/56x8_tilemap_cave.png" id="16_wnabx"]
@@ -102,6 +99,7 @@ sources/4 = SubResource("TileSetAtlasSource_i4xxf")
 [node name="Wolrd" type="Node2D" unique_id=1071080768]
 
 [node name="Background" type="Node2D" parent="." unique_id=1893954665]
+z_index = -10
 
 [node name="Sky+Stars" type="Parallax2D" parent="Background" unique_id=353724570]
 scroll_scale = Vector2(0, 0)
@@ -179,23 +177,8 @@ offset = Vector2(800, 520)
 
 [node name="Items" type="Node2D" parent="." unique_id=1749422466]
 
-[node name="Pole" type="Sprite2D" parent="Items" unique_id=1942038018]
-position = Vector2(0, 32)
-texture = ExtResource("1_6vryo")
-
-[node name="Campfire" type="Sprite2D" parent="Items" unique_id=1557616739]
-position = Vector2(0, 18)
-texture = ExtResource("2_h4w6o")
-
-[node name="Friend" type="Sprite2D" parent="Items" unique_id=436772756]
-position = Vector2(0, -44)
-texture = ExtResource("3_bqo2r")
-
-[node name="Fire" parent="Items" unique_id=1307416558 instance=ExtResource("11_4ss0p")]
-position = Vector2(-22, 15)
-
-[node name="Fire2" parent="Items" unique_id=1940609905 instance=ExtResource("11_4ss0p")]
-position = Vector2(-8, 3)
+[node name="Pole" parent="Items" unique_id=203912024 instance=ExtResource("8_ou75i")]
+position = Vector2(0, 51)
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1790359992]
 
