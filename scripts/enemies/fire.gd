@@ -13,6 +13,9 @@ func take_damage(damage: int) -> void:
 	display_damage()
 
 func display_damage() -> void:
-	var size: float = (float(health) / float(max_health)) / 2 + 0.5
+	var size: float = (float(health) / float(max_health)) / 1.5 + 1.0 / 3.0
 	$AnimatedSprite2D.scale = Vector2(size,size)
 	$CPUParticles2D.scale = Vector2(size,size)
+
+func ignite() -> void:
+	$AnimationPlayer.play("ignite")
