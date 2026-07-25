@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cr7w2oljkcksq"]
 
+[ext_resource type="Script" uid="uid://iuiup3tmulmx" path="res://scripts/enemies/fire.gd" id="1_g4y0b"]
 [ext_resource type="Texture2D" uid="uid://c7tnt8yq2k4ek" path="res://assets/enemies/fire.png" id="1_s86pc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wcp7n"]
@@ -45,6 +46,7 @@ animations = [{
 colors = PackedColorArray(0.45211428, 0.15050754, 0.036296267, 1, 1, 0.90670776, 0.885704, 1)
 
 [node name="Fire" type="Area2D" unique_id=1307416558]
+script = ExtResource("1_g4y0b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=738408485]
 shape = SubResource("CircleShape2D_wcp7n")
@@ -52,7 +54,7 @@ shape = SubResource("CircleShape2D_wcp7n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1297172194]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_2auwi")
-frame_progress = 0.89263284
+frame_progress = 0.549122
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2053473570]
 amount = 6

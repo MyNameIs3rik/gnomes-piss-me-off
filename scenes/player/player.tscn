@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://dk4umbo2ls6hk"]
 
 [ext_resource type="Script" uid="uid://bapq5gnxch2uu" path="res://scripts/player/player.gd" id="1_dovo2"]
-[ext_resource type="Texture2D" uid="uid://bv65tb37yw8et" path="res://assets/player/attack_11.png" id="2_fm80t"]
 [ext_resource type="Texture2D" uid="uid://y7au354fq2ww" path="res://assets/player/Player1.png" id="2_lvxji"]
 [ext_resource type="Texture2D" uid="uid://dd53kfvp6v2q3" path="res://assets/player/death_1.png" id="2_qek5x"]
 [ext_resource type="Texture2D" uid="uid://boh3twgvlwxcq" path="res://assets/player/death_2.png" id="3_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://iqqjysua8ggu" path="res://assets/player/player_idle1.png" id="3_75vfm"]
-[ext_resource type="Texture2D" uid="uid://cvcd6n5mnox1x" path="res://assets/player/attack_22.png" id="3_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://dlucvs2q4bx8l" path="res://assets/player/Player_walkf.png" id="3_p47bc"]
 [ext_resource type="Texture2D" uid="uid://cwjl1yy13jnf0" path="res://assets/player/player_spray.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://cs7f0g2powsag" path="res://assets/player/Player_walk_left-right.png" id="4_75vfm"]
@@ -15,17 +13,6 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_fm80t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_gx1jg")
-}],
-"loop": 1,
-"name": &"attack",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_qek5x")
@@ -86,21 +73,61 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2auwi"]
 size = Vector2(7, 30)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugbui"]
+bg_color = Color(0.25071824, 0.18838459, 0.17552719, 1)
+border_color = Color(0.03839716, 0.038397178, 0.0383971, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcs02"]
+bg_color = Color(0.16862746, 0, 0.6509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myrg7"]
+bg_color = Color(0.2509804, 0.1882353, 0.1764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvlxm"]
+bg_color = Color(0.81700003, 0.86, 0, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=1665968398]
 collision_layer = 2
-collision_mask = 3
 floor_snap_length = 2.0
 script = ExtResource("1_dovo2")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=2012316314]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"attack"
+animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1054483101]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_2auwi")
 
-[node name="Timer" type="Timer" parent="." unique_id=1787137524]
+[node name="AttackDelay" type="Timer" parent="." unique_id=1663033483]
+wait_time = 0.7
 
-[node name="attack_timer" type="Timer" parent="." unique_id=573923]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1710923519]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=294896041]
+offset_left = 854.0
+offset_top = 546.0
+offset_right = 1138.0
+offset_bottom = 629.0
+color = Color(0.11696668, 0.106, 0.2, 0.32941177)
+
+[node name="WaterBar" type="ProgressBar" parent="CanvasLayer" unique_id=565808251]
+offset_left = 867.0
+offset_top = 557.0
+offset_right = 1126.0
+offset_bottom = 584.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ugbui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fcs02")
+value = 20.0
+show_percentage = false
+
+[node name="PissBar" type="ProgressBar" parent="CanvasLayer" unique_id=2092685828]
+offset_left = 867.0
+offset_top = 592.0
+offset_right = 1126.0
+offset_bottom = 618.0
+theme_override_styles/background = SubResource("StyleBoxFlat_myrg7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kvlxm")
+value = 16.85
+show_percentage = false
