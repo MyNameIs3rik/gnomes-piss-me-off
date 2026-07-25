@@ -91,7 +91,7 @@ shape = SubResource("CircleShape2D_wcp7n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1297172194]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_2auwi")
-frame_progress = 0.47117147
+frame_progress = 0.39332104
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2053473570]
 amount = 6

@@ -98,8 +98,9 @@ _data = {
 [node name="Pole" type="Area2D" unique_id=203912024]
 z_index = -1
 collision_layer = 0
-collision_mask = 24
+collision_mask = 16
 script = ExtResource("1_1g8wv")
+ignition_timer_delay = 3.899
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1690173271]
 position = Vector2(5, -31)
@@ -122,3 +123,10 @@ libraries/ = SubResource("AnimationLibrary_a0p57")
 
 [node name="FireContainer" type="Node2D" parent="." unique_id=1527039580]
 position = Vector2(5, -31)
+
+[node name="RandomIgnition" type="Timer" parent="." unique_id=912609258]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="RandomIgnition" to="." method="_on_random_ignition_timeout"]

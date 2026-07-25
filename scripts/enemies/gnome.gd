@@ -4,7 +4,6 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	$AnimatedSprite.play("Idle")
-	
 
 func _physics_process(delta):
 	if not is_on_floor():

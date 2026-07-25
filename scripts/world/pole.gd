@@ -1,17 +1,24 @@
 extends Area2D
 
+@export_range(0.5,10) var ignition_timer_delay: float = 5
 var max_fire_count: int = 15
 var fire_count: int = 0
+var wet: int = 0
+var ignited: bool = false
 
 const FIRE = preload("res://scenes/enemies/fire.tscn")
 @onready var fire_container = $FireContainer
 @onready var area = $CollisionPolygon2D
 @onready var rng = RandomNumberGenerator.new()
 
+func _ready():
+	$RandomIgnition.wait_time = ignition_timer_delay
+
 func play_impale() -> void:
 	$AnimationPlayer.play("Impale")
 
-func ignite():
+func ignite() -> void:
+	ignited = true
 	if fire_count >= max_fire_count:
 		return
 	var fire = FIRE.instantiate()
@@ -39,4 +46,18 @@ func get_random_pos(points: PackedVector2Array) -> Vector2:
 
 func decrement() -> void:
 	fire_count -= 1
-	print("decrement")
+	if fire_count <= 0:
+		ignited = false
+		fire_count = 0
+
+
+
+func _on_random_ignition_timeout() -> void:
+	if wet > 0:
+		wet -= 1
+	elif ignited:
+		ignite()
+
+
+func _on_area_entered(_area):
+	wet = 5
