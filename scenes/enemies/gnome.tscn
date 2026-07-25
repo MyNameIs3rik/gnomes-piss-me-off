@@ -33,13 +33,34 @@ animations = [{
 z_index = 2
 collision_layer = 4
 script = ExtResource("1_ap4xf")
+vander_distance = 290
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=945780329]
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_2auwi")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1777568028]
-position = Vector2(1, -16)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2auwi")
 animation = &"Idle"
 frame_progress = 0.084638424
+
+[node name="AttackSpawner" type="Node2D" parent="." unique_id=1252781660]
+position = Vector2(4, -5)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=2104502030]
+
+[node name="RandomEvent" type="Timer" parent="." unique_id=619924224]
+
+[node name="RayCasts" type="Node2D" parent="." unique_id=1655334113]
+
+[node name="RayDown" type="RayCast2D" parent="RayCasts" unique_id=306512158]
+position = Vector2(0, -2)
+target_position = Vector2(22, 0)
+
+[node name="RayUp" type="RayCast2D" parent="RayCasts" unique_id=678304904]
+position = Vector2(0, -33)
+target_position = Vector2(22, 0)
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="RandomEvent" to="." method="_on_random_event_timeout"]
