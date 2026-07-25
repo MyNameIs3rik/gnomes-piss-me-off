@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cs7f0g2powsag" path="res://assets/player/Player_walk_left-right.png" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cxo32ok5xhq2w" path="res://assets/player/resp_2.png" id="5_h17s1"]
 [ext_resource type="Texture2D" uid="uid://dw6cfj4q0nlog" path="res://assets/player/resp_1.png" id="7_5gtgg"]
+[ext_resource type="Texture2D" uid="uid://b85cicvysqc2r" path="res://assets/player/jump.png" id="8_gx1jg"]
 [ext_resource type="AudioStream" uid="uid://cct2ndi174gmr" path="res://assets/sounds/player/zip_up.mp3" id="11_fm80t"]
 [ext_resource type="AudioStream" uid="uid://qxdhbo7auu5x" path="res://assets/sounds/player/zip_down.mp3" id="12_gx1jg"]
 
@@ -42,6 +43,14 @@ animations = [{
 "loop": 1,
 "name": &"idle",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_gx1jg")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

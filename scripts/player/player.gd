@@ -29,7 +29,9 @@ const PEE = preload("res://scenes/player/pee.tscn")
 enum STATE {
 	DEFAULT,
 	ZIPPING,
-	PISSING
+	PISSING,
+	DEAD,
+	JUMPING
 }
 
 @export var current_state = STATE.DEFAULT
@@ -72,11 +74,14 @@ func _physics_process(delta):
 		velocity.y += gravity * delta * 0.9
 		if velocity.y > 400:
 			velocity.y = 400
+		current_state = STATE.JUMPING
+	elif current_state == STATE.JUMPING:
+		current_state = STATE.DEFAULT
 	elif Input.is_action_just_pressed("Up") and current_state == STATE.DEFAULT:
 		velocity.y = JUMP * -10
 	
 	var dir:int = int(Input.get_axis("Left","Right"))
-	if current_state != STATE.DEFAULT:
+	if current_state != STATE.DEFAULT and current_state != STATE.JUMPING:
 		dir = 0
 	
 	if dir == 1:
@@ -100,6 +105,8 @@ func _physics_process(delta):
 		
 	if dir == 0 and current_state == STATE.DEFAULT:
 		animation.play("idle")
+	elif current_state == STATE.JUMPING:
+		animation.play('jump')
 	elif dir == 1 or dir == -1:
 		animation.play("walk")
 	
