@@ -133,3 +133,6 @@ func convert_fluids(delta) -> void:
 
 func _on_pee_delay_timeout():
 	can_pee = true
+
+func take_damage():
+	print("damage_taken")

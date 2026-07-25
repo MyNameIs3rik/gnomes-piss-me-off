@@ -28,13 +28,13 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CollisionShape2D:position:x")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.26666668),
+"times": PackedFloat32Array(0, 0.16666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.5, 9.0]
+"values": [0.5, 13.0]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -63,7 +63,7 @@ collision_mask = 2
 script = ExtResource("1_qapmu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=508442460]
-position = Vector2(0.5, -0.5)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_2auwi")
 
 [node name="Showel" type="Sprite2D" parent="CollisionShape2D" unique_id=846401157]

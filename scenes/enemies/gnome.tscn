@@ -35,6 +35,9 @@ collision_layer = 4
 script = ExtResource("1_ap4xf")
 vander_distance = 290
 
+[node name="AttackSpawner" type="Node2D" parent="." unique_id=1252781660]
+position = Vector2(4, -7)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=945780329]
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_2auwi")
@@ -45,10 +48,8 @@ sprite_frames = SubResource("SpriteFrames_2auwi")
 animation = &"Idle"
 frame_progress = 0.084638424
 
-[node name="AttackSpawner" type="Node2D" parent="." unique_id=1252781660]
-position = Vector2(4, -5)
-
 [node name="AttackCooldown" type="Timer" parent="." unique_id=2104502030]
+one_shot = true
 
 [node name="RandomEvent" type="Timer" parent="." unique_id=619924224]
 
@@ -61,6 +62,11 @@ target_position = Vector2(22, 0)
 [node name="RayUp" type="RayCast2D" parent="RayCasts" unique_id=678304904]
 position = Vector2(0, -33)
 target_position = Vector2(22, 0)
+
+[node name="PlayerDetect" type="RayCast2D" parent="RayCasts" unique_id=1814838369]
+position = Vector2(-38, -15)
+target_position = Vector2(200, 0)
+collision_mask = 2
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="RandomEvent" to="." method="_on_random_event_timeout"]
