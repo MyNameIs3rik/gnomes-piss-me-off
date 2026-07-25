@@ -257,7 +257,6 @@ one_shot = true
 [node name="sounds" type="Node" parent="." unique_id=539577723]
 
 [node name="ZipUp" type="AudioStreamPlayer2D" parent="sounds" unique_id=533641126]
-position = Vector2(-16, 2)
 stream = ExtResource("11_fm80t")
 volume_db = 10.0
 
