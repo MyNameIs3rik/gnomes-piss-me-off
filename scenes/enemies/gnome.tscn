@@ -30,6 +30,7 @@ animations = [{
 }]
 
 [node name="Gnome" type="CharacterBody2D" unique_id=1972237894]
+z_index = 2
 collision_layer = 4
 script = ExtResource("1_ap4xf")
 

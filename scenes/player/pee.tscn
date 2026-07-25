@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cxs1p3fgmri6p"]
+
+[ext_resource type="Script" uid="uid://b00hgupv0wvfj" path="res://scripts/player/pee.gd" id="1_uhgyt"]
+[ext_resource type="Texture2D" uid="uid://cm4rfxwqiyqba" path="res://assets/player/piss.png" id="2_88vim"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2auwi"]
+radius = 2.0
+
+[node name="pee" type="Area2D" unique_id=2042339371]
+collision_layer = 0
+collision_mask = 13
+script = ExtResource("1_uhgyt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1777656485]
+shape = SubResource("CircleShape2D_2auwi")
+
+[node name="Piss" type="Sprite2D" parent="." unique_id=1445583040]
+texture = ExtResource("2_88vim")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

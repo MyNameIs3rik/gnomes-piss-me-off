@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cs7f0g2powsag" path="res://assets/player/Player_walk_left-right.png" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cxo32ok5xhq2w" path="res://assets/player/resp_2.png" id="5_h17s1"]
 [ext_resource type="Texture2D" uid="uid://dw6cfj4q0nlog" path="res://assets/player/resp_1.png" id="7_5gtgg"]
+[ext_resource type="AudioStream" uid="uid://cct2ndi174gmr" path="res://assets/sounds/player/zip_up.mp3" id="11_fm80t"]
+[ext_resource type="AudioStream" uid="uid://qxdhbo7auu5x" path="res://assets/sounds/player/zip_down.mp3" id="12_gx1jg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
@@ -44,9 +46,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_0owmy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_0owmy")
 }],
 "loop": 1,
 "name": &"pee",
@@ -73,6 +72,142 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2auwi"]
 size = Vector2(7, 30)
 
+[sub_resource type="Animation" id="Animation_ugbui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sounds/ZipDown:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("animation:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"pee"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:current_state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sounds/ZipUp:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_h17s1"]
+resource_name = "zip_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animation:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"pee"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sounds/ZipDown:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:current_state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_fm80t"]
+resource_name = "zip_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animation:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sounds/ZipUp:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:current_state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_je7p5"]
+_data = {
+&"RESET": SubResource("Animation_ugbui"),
+&"zip_down": SubResource("Animation_h17s1"),
+&"zip_up": SubResource("Animation_fm80t")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugbui"]
 bg_color = Color(0.25071824, 0.18838459, 0.17552719, 1)
 border_color = Color(0.03839716, 0.038397178, 0.0383971, 1)
@@ -87,21 +222,39 @@ bg_color = Color(0.2509804, 0.1882353, 0.1764706, 1)
 bg_color = Color(0.81700003, 0.86, 0, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=1665968398]
+z_index = 1
 collision_layer = 2
 floor_snap_length = 2.0
 script = ExtResource("1_dovo2")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=2012316314]
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"walk"
+animation = &"pee"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1054483101]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_2auwi")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1176906452]
+libraries/ = SubResource("AnimationLibrary_je7p5")
+
 [node name="AttackDelay" type="Timer" parent="." unique_id=1663033483]
 wait_time = 0.7
+
+[node name="PeeDelay" type="Timer" parent="." unique_id=530437120]
+one_shot = true
+
+[node name="sounds" type="Node" parent="." unique_id=539577723]
+
+[node name="ZipUp" type="AudioStreamPlayer2D" parent="sounds" unique_id=533641126]
+position = Vector2(-16, 2)
+stream = ExtResource("11_fm80t")
+volume_db = 10.0
+
+[node name="ZipDown" type="AudioStreamPlayer2D" parent="sounds" unique_id=49616400]
+stream = ExtResource("12_gx1jg")
+volume_db = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1710923519]
 
@@ -131,3 +284,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_myrg7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_kvlxm")
 value = 16.85
 show_percentage = false
+
+[connection signal="timeout" from="PeeDelay" to="." method="_on_pee_delay_timeout"]
