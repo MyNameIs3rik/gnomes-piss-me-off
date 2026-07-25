@@ -19,6 +19,7 @@ var friction: int = 25
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #imports
+var Showel = preload("res://scenes/player/showel.tscn")
 @onready var animation: AnimatedSprite2D = $animation
 @onready var Aplayer = $AnimationPlayer
 @onready var water_bar = $CanvasLayer/WaterBar
@@ -45,6 +46,10 @@ func _physics_process(delta):
 	#temp
 	if is_on_floor() and current_state == STATE.DEFAULT and Input.is_action_pressed("Piss"):
 		water = 50
+	
+	if Input.is_action_just_pressed("Attack"):
+		var shovel = Showel.instantiate()
+		add_child(shovel)
 	
 	if current_state == STATE.PISSING and not Input.is_action_pressed("RightClick"):
 		current_state = STATE.ZIPPING

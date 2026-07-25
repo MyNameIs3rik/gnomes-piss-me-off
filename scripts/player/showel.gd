@@ -1,11 +1,11 @@
 extends Area2D
 
 func _ready() -> void:
-	$AnimationPlayer.play("stab")
+	$AnimationPlayer.play("attack")
 
 func _on_body_entered(body) -> void:
-	body.take_damage()
+	body.die()
 	$CollisionShape2D.set_deferred("disabled",true)
-	
-func die() -> void:
+
+func delete() -> void:
 	queue_free()
