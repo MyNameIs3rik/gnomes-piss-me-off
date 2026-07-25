@@ -98,7 +98,7 @@ _data = {
 [node name="Pole" type="Area2D" unique_id=203912024]
 z_index = -1
 collision_layer = 0
-collision_mask = 16
+collision_mask = 24
 script = ExtResource("1_1g8wv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1690173271]
