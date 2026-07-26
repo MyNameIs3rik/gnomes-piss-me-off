@@ -30,7 +30,6 @@ const PEE = preload("res://scenes/player/pee.tscn")
 
 enum STATE {
 	DEFAULT,
-	ATTACKING,
 	ZIPPING,
 	PISSING,
 	DEAD,
