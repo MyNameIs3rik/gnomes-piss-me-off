@@ -6,6 +6,16 @@ var fire_count: int = 0
 var wet: int = 0
 var ignited: bool = false
 
+
+@onready var friend: Sprite2D = $Friend
+@onready var pole: Sprite2D = $Pole
+
+
+#useless
+var max_health: int = 1000
+var health: int = max_health
+var destroyed: bool = false
+
 const FIRE = preload("res://scenes/enemies/fire.tscn")
 @onready var fire_container = $FireContainer
 @onready var area = $CollisionPolygon2D
@@ -24,24 +34,20 @@ func ignite() -> void:
 	var fire = FIRE.instantiate()
 	fire.fire_place = self
 	fire.position = get_random_pos(area.polygon)
-	fire.ignite()
 	fire_container.add_child(fire)
+	fire.ignite()
 	fire_count += 1
 
 func get_random_pos(points: PackedVector2Array) -> Vector2:
 	var rect = Rect2(points[0], Vector2.ZERO)
-	
 	for point in points:
 		rect = rect.expand(point)
-	
 	while true:
 		var point = Vector2(
 		rng.randf_range(rect.position.x, rect.end.x),
 		rng.randf_range(rect.position.y, rect.end.y))
-		
 		if Geometry2D.is_point_in_polygon(point, points):
 			return point
-	
 	return Vector2.ZERO
 
 func decrement() -> void:
@@ -50,14 +56,34 @@ func decrement() -> void:
 		ignited = false
 		fire_count = 0
 
+func take_fire_damage(amount: int) -> void:
+	if destroyed:
+		return
+	health -= amount
+	$Pole.position.y += amount * 0.25
+	$Friend.position.y += amount * 0.25
+	#print($Pole.position.y)
+	if $Pole.position.y >= 18:
+		_destroy_pole()
 
+func _destroy_pole() -> void:
+	destroyed = true
+	ignited = false
+	wet = 0
+	for fire in fire_container.get_children():
+		fire.queue_free()
+	fire_count = 0
+	$RandomIgnition.stop()
+	await get_tree().create_timer(3.0).timeout
+	get_tree().reload_current_scene()
 
 func _on_random_ignition_timeout() -> void:
+	if destroyed:
+		return
 	if wet > 0:
 		wet -= 1
 	elif ignited:
 		ignite()
-
 
 func _on_area_entered(_area):
 	wet = 5

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cwjl1yy13jnf0" path="res://assets/player/player_spray.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://cs7f0g2powsag" path="res://assets/player/Player_walk_left-right.png" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cxo32ok5xhq2w" path="res://assets/player/resp_2.png" id="5_h17s1"]
+[ext_resource type="Texture2D" uid="uid://bfodxi0mruti5" path="res://assets/player/drinker.png" id="6_lgqa7"]
 [ext_resource type="Texture2D" uid="uid://dw6cfj4q0nlog" path="res://assets/player/resp_1.png" id="7_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://b85cicvysqc2r" path="res://assets/player/jump.png" id="8_gx1jg"]
 [ext_resource type="AudioStream" uid="uid://cct2ndi174gmr" path="res://assets/sounds/player/zip_up.mp3" id="11_fm80t"]
@@ -37,6 +38,17 @@ animations = [{
 "loop": 0,
 "name": &"death",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_5gtgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lgqa7")
+}],
+"loop": 1,
+"name": &"drink",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -255,7 +267,7 @@ shape = SubResource("RectangleShape2D_2auwi")
 libraries/ = SubResource("AnimationLibrary_je7p5")
 
 [node name="AttackDelay" type="Timer" parent="." unique_id=1663033483]
-wait_time = 0.7
+wait_time = 1.887
 one_shot = true
 
 [node name="PeeDelay" type="Timer" parent="." unique_id=530437120]
@@ -264,6 +276,10 @@ one_shot = true
 [node name="Healing" type="Timer" parent="." unique_id=864115744]
 wait_time = 2.5
 autostart = true
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1304337855]
+wait_time = 2.475
+one_shot = true
 
 [node name="sounds" type="Node" parent="." unique_id=539577723]
 
@@ -332,3 +348,4 @@ show_percentage = false
 [connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="PeeDelay" to="." method="_on_pee_delay_timeout"]
 [connection signal="timeout" from="Healing" to="." method="_on_healing_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

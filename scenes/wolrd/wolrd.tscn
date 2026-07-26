@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b4yhv036k6aok" path="res://assets/world/200x168_tilemap.png" id="15_f1qrj"]
 [ext_resource type="Script" uid="uid://sv3yb3de72uo" path="res://scripts/player/camera.gd" id="15_o26f6"]
 [ext_resource type="Texture2D" uid="uid://dvq1d26e1khsb" path="res://assets/world/56x8_tilemap_cave.png" id="16_wnabx"]
+[ext_resource type="Script" uid="uid://ceuiuv8u6eoom" path="res://scripts/world/drinking_zone.gd" id="19_dyalv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr87f"]
 texture = ExtResource("1_8x47l")
@@ -150,6 +151,9 @@ sources/3 = SubResource("TileSetAtlasSource_meist")
 sources/4 = SubResource("TileSetAtlasSource_i4xxf")
 sources/5 = SubResource("TileSetAtlasSource_dyalv")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(162, 7)
+
 [node name="Wolrd" type="Node2D" unique_id=1071080768]
 script = ExtResource("1_4ss0p")
 
@@ -270,4 +274,15 @@ position = Vector2(92, -91)
 wait_time = 2.0
 one_shot = true
 
+[node name="drinking_zone" type="Area2D" parent="." unique_id=778196821]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("19_dyalv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drinking_zone" unique_id=2037819818]
+position = Vector2(1017, 52.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
 [connection signal="timeout" from="Helpers/Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="drinking_zone" to="drinking_zone" method="_on_body_entered"]
+[connection signal="body_exited" from="drinking_zone" to="drinking_zone" method="_on_body_exited"]

@@ -13,6 +13,8 @@ var damage_taken: int = 0
 
 var can_pee: bool = true
 
+var is_near_water: bool = false
+
 #physics
 var MAX_SPEED: int = 120
 var ACCELERATION:int = 15
@@ -26,6 +28,7 @@ var Showel = preload("res://scenes/player/showel.tscn")
 @onready var Aplayer = $AnimationPlayer
 @onready var water_bar = $CanvasLayer/WaterBar
 @onready var piss_bar = $CanvasLayer/PissBar
+
 
 @onready var damage_layers := [
 	$CanvasLayer/Damage1,
@@ -42,7 +45,8 @@ enum STATE {
 	ZIPPING,
 	PISSING,
 	DEAD,
-	JUMPING
+	JUMPING,
+	DRINKING
 }
 
 @export var current_state = STATE.DEFAULT
@@ -54,8 +58,22 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	#temp
-	if is_on_floor() and current_state == STATE.DEFAULT and Input.is_action_pressed("Piss"):
-		water = 50
+	if current_state == STATE.DEAD:
+		move_and_slide()
+		return
+		
+	if current_state == STATE.DEFAULT and is_near_water and Input.is_action_pressed("Piss"):
+		current_state = STATE.DRINKING
+		animation.play("drink")
+
+	if current_state == STATE.DRINKING:
+		if not is_near_water or not Input.is_action_pressed("Piss") or water >= max_water:
+			current_state = STATE.DEFAULT
+		else:
+			water += delta * 15
+			if water > max_water:
+				water = max_water
+	
 	
 	if Input.is_action_just_pressed("Attack"):
 		if can_attack:
@@ -160,6 +178,7 @@ func take_damage():
 	%Camera.start(0.2,3,0.2)
 	if health < 1:
 		#tu zdechnes
+		_die()
 		return
 	damage_layers[max_health - health - 1].modulate = "ffffffff"
 
@@ -176,3 +195,22 @@ func _on_healing_timeout():
 		var tween = create_tween()
 		tween.tween_property(damage_layers[max_health - health - 1], "modulate:a", 0.0, 2.0)
 		health += 1
+		
+func _die() -> void:
+	if current_state == STATE.DEAD:
+		return
+	current_state = STATE.DEAD
+	velocity = Vector2.ZERO
+	water = 0
+	piss = 0
+	# play your death animation here — see note below on which node
+	animation.play("death")   # or animation.play("death") if it's on the AnimatedSprite2D
+	$RespawnTimer.start()
+
+
+func _on_respawn_timer_timeout() -> void:
+	health = max_health
+	damage_taken = 0
+	current_state = STATE.DEFAULT
+	for layer in damage_layers:
+		layer.modulate.a = 0.0

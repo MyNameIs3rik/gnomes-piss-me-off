@@ -111,3 +111,7 @@ color_initial_ramp = SubResource("Gradient_wcp7n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2061959115]
 libraries/ = SubResource("AnimationLibrary_xfvci")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=186478025]
+
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
