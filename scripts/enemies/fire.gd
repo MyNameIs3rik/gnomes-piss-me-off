@@ -28,7 +28,7 @@ func ignite() -> void:
 	$DamageTimer.start()
 
 func _on_damage_timer_timeout() -> void:
-	if fire_place and is_instance_valid(fire_place):
+	if fire_place and is_instance_valid(fire_place) and fire_place.has_method("take_fire_damage"):
 		fire_place.take_fire_damage(damage_per_tick)
 	else:
 		$DamageTimer.stop()

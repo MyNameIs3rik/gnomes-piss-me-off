@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cwj4fojge8l5w"]
+
+[ext_resource type="Script" uid="uid://c3vugf3jkw5gu" path="res://spawner.gd" id="1_l2yfu"]
+[ext_resource type="Texture2D" uid="uid://ccxywnnmtw76r" path="res://assets/world/camp.png" id="2_bnx6b"]
+[ext_resource type="PackedScene" uid="uid://bxp5adu5vxsyj" path="res://scenes/enemies/gnome.tscn" id="2_n7vcq"]
+
+[node name="Spawner" type="Node2D" unique_id=1503399717]
+script = ExtResource("1_l2yfu")
+enemy_scene = ExtResource("2_n7vcq")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1727676957]
+autostart = true
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1961577906]
+
+[node name="spawn1" type="Marker2D" parent="SpawnPoints" unique_id=1693726228]
+position = Vector2(-16, -1)
+
+[node name="spawn2" type="Marker2D" parent="SpawnPoints" unique_id=1399688700]
+position = Vector2(13, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2088370566]
+texture = ExtResource("2_bnx6b")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

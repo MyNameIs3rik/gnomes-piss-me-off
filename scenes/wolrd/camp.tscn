@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cknoowbvvoaxs"]
+
+[ext_resource type="PackedScene" uid="uid://b674u05wxsolk" path="res://scenes/wolrd/torch.tscn" id="1_qtvv2"]
+[ext_resource type="PackedScene" uid="uid://cwj4fojge8l5w" path="res://scenes/wolrd/spawner.tscn" id="2_gr8qr"]
+
+[node name="camp" type="Node2D" unique_id=1380275838]
+
+[node name="torch" parent="." unique_id=261915366 instance=ExtResource("1_qtvv2")]
+position = Vector2(32, 0)
+
+[node name="Spawner" parent="." unique_id=1503399717 node_paths=PackedStringArray("torch") instance=ExtResource("2_gr8qr")]
+position = Vector2(-5, -4)
+torch = NodePath("../torch")

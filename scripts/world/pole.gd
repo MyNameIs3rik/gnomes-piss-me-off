@@ -15,7 +15,7 @@ var ignited: bool = false
 var max_health: int = 1000
 var health: int = max_health
 var destroyed: bool = false
-
+var fire_speed: float = 0.2
 const FIRE = preload("res://scenes/enemies/fire.tscn")
 @onready var fire_container = $FireContainer
 @onready var area = $CollisionPolygon2D
@@ -26,7 +26,6 @@ func _ready():
 
 func play_impale() -> void:
 	$AnimationPlayer.play("Impale")
-
 func ignite() -> void:
 	ignited = true
 	if fire_count >= max_fire_count:
@@ -60,8 +59,8 @@ func take_fire_damage(amount: int) -> void:
 	if destroyed:
 		return
 	health -= amount
-	$Pole.position.y += amount * 0.25
-	$Friend.position.y += amount * 0.25
+	$Pole.position.y += amount * fire_speed
+	$Friend.position.y += amount * fire_speed
 	#print($Pole.position.y)
 	if $Pole.position.y >= 18:
 		_destroy_pole()
