@@ -21,7 +21,8 @@ var desired_pos: int = 0
 enum STATE {
 	IDLE,
 	PANIC,
-	ATTACK
+	ATTACK,
+	DEAD
 }
 
 var current_state = STATE.IDLE
@@ -44,6 +45,14 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta * 0.9
 		velocity.y = min(velocity.y, 400.0)
+	
+	if current_state == STATE.DEAD:
+		if $AnimatedSprite.flip_h == true:
+			rotation += 7*delta
+		else:
+			rotation -= 7*delta
+		move_and_slide()
+		return
 
 
 	# --------------------------------
@@ -255,4 +264,11 @@ func _on_attack_cooldown_timeout() -> void:
 	can_attack = true
 
 func die() -> void:
+	current_state = STATE.DEAD
+	$CollisionShape2D.set_deferred("disabled",true)
+	velocity = Vector2(randf_range(-150,150),randf_range(-150,-300))
+	$DeathTimer.start()
+
+
+func _on_death_timer_timeout() -> void:
 	queue_free()

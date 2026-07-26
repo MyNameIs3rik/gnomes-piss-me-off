@@ -8,6 +8,7 @@ var max_piss: int = 100
 var piss: float = 0.0
 var max_health: int = 10
 var health: int = max_health
+var can_attack: bool = true
 
 var can_pee: bool = true
 
@@ -29,6 +30,7 @@ const PEE = preload("res://scenes/player/pee.tscn")
 
 enum STATE {
 	DEFAULT,
+	ATTACKING,
 	ZIPPING,
 	PISSING,
 	DEAD,
@@ -48,8 +50,13 @@ func _physics_process(delta):
 		water = 50
 	
 	if Input.is_action_just_pressed("Attack"):
-		var shovel = Showel.instantiate()
-		add_child(shovel)
+		if can_attack:
+			var shovel = Showel.instantiate()
+			if $animation.flip_h == true:
+				shovel.scale.x = -1
+			add_child(shovel)
+			can_attack = false
+			$AttackDelay.start()
 	
 	if current_state == STATE.PISSING and not Input.is_action_pressed("RightClick"):
 		current_state = STATE.ZIPPING
@@ -141,3 +148,7 @@ func _on_pee_delay_timeout():
 
 func take_damage():
 	print("damage_taken")
+
+
+func _on_attack_delay_timeout():
+	can_attack = true

@@ -251,6 +251,7 @@ libraries/ = SubResource("AnimationLibrary_je7p5")
 
 [node name="AttackDelay" type="Timer" parent="." unique_id=1663033483]
 wait_time = 0.7
+one_shot = true
 
 [node name="PeeDelay" type="Timer" parent="." unique_id=530437120]
 one_shot = true
@@ -294,4 +295,5 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_kvlxm")
 value = 16.85
 show_percentage = false
 
+[connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="PeeDelay" to="." method="_on_pee_delay_timeout"]
