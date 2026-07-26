@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://b85cicvysqc2r" path="res://assets/player/jump.png" id="8_gx1jg"]
 [ext_resource type="AudioStream" uid="uid://cct2ndi174gmr" path="res://assets/sounds/player/zip_up.mp3" id="11_fm80t"]
 [ext_resource type="AudioStream" uid="uid://qxdhbo7auu5x" path="res://assets/sounds/player/zip_down.mp3" id="12_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://dovmwhwimpclg" path="res://assets/player/damage_indicator/dmg0.png" id="14_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://ds11jsghjcoox" path="res://assets/player/damage_indicator/dmg1.png" id="15_lgqa7"]
+[ext_resource type="Texture2D" uid="uid://c5tv2gwd8br1c" path="res://assets/player/damage_indicator/dmg2.png" id="16_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://bu45jfnq61u8g" path="res://assets/player/damage_indicator/dmg3.png" id="17_3j4b4"]
+[ext_resource type="Texture2D" uid="uid://b3enq28i0bgs5" path="res://assets/player/damage_indicator/dmg4.png" id="18_yj68g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
@@ -256,6 +261,10 @@ one_shot = true
 [node name="PeeDelay" type="Timer" parent="." unique_id=530437120]
 one_shot = true
 
+[node name="Healing" type="Timer" parent="." unique_id=864115744]
+wait_time = 2.5
+autostart = true
+
 [node name="sounds" type="Node" parent="." unique_id=539577723]
 
 [node name="ZipUp" type="AudioStreamPlayer2D" parent="sounds" unique_id=533641126]
@@ -267,6 +276,31 @@ stream = ExtResource("12_gx1jg")
 volume_db = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1710923519]
+
+[node name="Damage1" type="Sprite2D" parent="CanvasLayer" unique_id=945003830]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("14_uf5tr")
+centered = false
+
+[node name="Damage2" type="Sprite2D" parent="CanvasLayer" unique_id=1492596322]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("15_lgqa7")
+centered = false
+
+[node name="Damage3" type="Sprite2D" parent="CanvasLayer" unique_id=1644424025]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("16_8ydkj")
+centered = false
+
+[node name="Damage4" type="Sprite2D" parent="CanvasLayer" unique_id=1147759497]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("17_3j4b4")
+centered = false
+
+[node name="Damage5" type="Sprite2D" parent="CanvasLayer" unique_id=997400879]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("18_yj68g")
+centered = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=294896041]
 offset_left = 854.0
@@ -297,3 +331,4 @@ show_percentage = false
 
 [connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="PeeDelay" to="." method="_on_pee_delay_timeout"]
+[connection signal="timeout" from="Healing" to="." method="_on_healing_timeout"]

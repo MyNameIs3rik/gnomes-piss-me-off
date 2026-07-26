@@ -6,9 +6,10 @@ var max_water: int = 100
 var water: float = 0.0
 var max_piss: int = 100
 var piss: float = 0.0
-var max_health: int = 10
+var max_health: int = 6
 var health: int = max_health
 var can_attack: bool = true
+var damage_taken: int = 0
 
 var can_pee: bool = true
 
@@ -25,6 +26,14 @@ var Showel = preload("res://scenes/player/showel.tscn")
 @onready var Aplayer = $AnimationPlayer
 @onready var water_bar = $CanvasLayer/WaterBar
 @onready var piss_bar = $CanvasLayer/PissBar
+
+@onready var damage_layers := [
+	$CanvasLayer/Damage1,
+	$CanvasLayer/Damage2,
+	$CanvasLayer/Damage3,
+	$CanvasLayer/Damage4,
+	$CanvasLayer/Damage5
+]
 
 const PEE = preload("res://scenes/player/pee.tscn")
 
@@ -146,8 +155,24 @@ func _on_pee_delay_timeout():
 	can_pee = true
 
 func take_damage():
-	print("damage_taken")
+	damage_taken = 3
+	health -= 1
+	%Camera.start(0.2,3,0.2)
+	if health < 1:
+		#tu zdechnes
+		return
+	damage_layers[max_health - health - 1].modulate = "ffffffff"
+
 
 
 func _on_attack_delay_timeout():
 	can_attack = true
+
+
+func _on_healing_timeout():
+	if damage_taken > 0:
+		damage_taken -= 1
+	elif health < max_health:
+		var tween = create_tween()
+		tween.tween_property(damage_layers[max_health - health - 1], "modulate:a", 0.0, 2.0)
+		health += 1

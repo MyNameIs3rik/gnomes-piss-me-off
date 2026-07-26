@@ -247,6 +247,7 @@ unique_name_in_owner = true
 position = Vector2(16, 33)
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1363966795]
+unique_name_in_owner = true
 position = Vector2(0, -23)
 zoom = Vector2(3, 3)
 process_callback = 0
